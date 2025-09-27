@@ -1,151 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <!-- // index versao oficial  -->
+  <!-- versao 2  -->
   <head>
     <meta charset="UTF-8" />
-    <title>Fênix Conecta</title>
+    <title>MVP Doações</title>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h2 {
+        margin-top: 30px;
+      }
+      input,
+      button {
+        margin: 5px;
+        padding: 8px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 15px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      th {
+        background: #f2f2f2;
+      }
+      .hidden {
+        display: none;
+      }
+      .section {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <div id="main-container">
-      <!-- header  -->
-      <div class="intro-section text-center">
-        <div class="">
-          <img src="./logo-ong.png" alt="" />
-        </div>
-        <h1>Fênix Conecta</h1>
-        <p>Sistema de Prospecção de Doações</p>
-      </div>
+    <h1>💰 MVP Doações - Supabase</h1>
 
-      <!-- Login / Signup -->
-      <div id="auth-section" class="section text-center">
-        <div class="mb-2">
-          <h2>Login</h2>
-        </div>
-        <div class="auth-inputs-column">
-          <input type="email" id="email" placeholder="Email" />
-          <br />
-          <input
-            class="mt-1"
-            type="password"
-            id="password"
-            placeholder="Senha"
-          />
-        </div>
-
-        <!-- <button onclick="signUp()">Cadastrar</button> -->
-        <button class="bg-orange" onclick="signIn()">Entrar</button>
-        <button id="sair-btn" class="hidden" onclick="signOut()">
-          <i class="fa-solid fa-right-from-bracket"></i> Sair
-        </button>
-        <!-- <hr> -->
-        <div class="mt-2">
-          <p class="mb-1">Credenciais de teste:</p>
-          <span><b>Admin:</b> admin@admin.com / 123123</span> <br />
-          <!-- <span><b>Usuário:</b> teste@sistema.com / 123123</span> -->
-        </div>
-      </div>
-
-      <!-- Doadores -->
-      <div id="doador-section" class="section hidden">
-        <div class="mb-2">
-          <h2><i class="fa-regular fa-heart"></i> Doadores</h2>
-          <p>Gerencie os doadores da organização</p>
-        </div>
-        <input type="text" id="doadorNome" placeholder="Nome" />
-        <input type="text" id="doadorTelefone" placeholder="Telefone" />
-        <input type="text" id="doadorEmail" placeholder="Email" />
-        <input type="text" id="doadorCpf" placeholder="CPF/CNPJ" />
-        <input type="text" id="doadorEndereco" placeholder="Endereço" />
-        <button onclick="addDoador()">Adicionar</button>
-        <table id="doadorTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Telefone</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <!-- Doações -->
-      <div id="doacao-section" class="section hidden">
-        <div class="mb-2">
-          <h2><i class="fa-regular fa-dollar-sign"></i> Doações</h2>
-          <p>Gerencie as doações recebidas</p>
-        </div>
-        <input type="number" id="doacaoValor" placeholder="Valor" />
-        <input type="date" id="doacaoData" />
-        <input type="text" id="doacaoForma" placeholder="Forma de Pagamento" />
-        <button onclick="addDoacao()">Adicionar</button>
-        <table id="doacaoTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Doador ID</th>
-              <th>Valor</th>
-              <th>Data</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <!-- Interações -->
-      <div id="interacao-section" class="section hidden">
-        <div class="mb-2">
-          <h2><i class="fa-regular fa-comment"></i> Interações</h2>
-          <p>Registre contatos e interações com doadores</p>
-        </div>
-        <input type="text" id="tipoInteracao" placeholder="Tipo" />
-        <input type="text" id="observacoes" placeholder="Observações" />
-        <button onclick="addInteracaoNova()">Adicionar</button>
-        <table id="interacaoTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Doador ID</th>
-              <th>Tipo</th>
-              <th>Obs</th>
-              <th>Data</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+    <!-- Login / Signup -->
+    <div id="auth-section" class="section">
+      <h2>Login / Cadastro</h2>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Senha" />
+      <button onclick="signUp()">Cadastrar</button>
+      <button onclick="signIn()">Entrar</button>
+      <button onclick="signOut()">Sair</button>
     </div>
 
-    <!-- Rodapé -->
-    <footer>
-      <p>Feito por Isabelle Dutra - Uninter Ads 2025</p>
-      <div class="social-links">
-        <!-- <a href="#">
-          <i class="fa-solid fa-globe"></i>
-        </a> -->
-        <a href="https://github.com/IsabelleDutrax">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/isabelle-alves-dutra-9514a3202">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </div>
-    </footer>
+    <!-- Doadores -->
+    <div id="doador-section" class="section hidden">
+      <h2>Doadores</h2>
+      <input type="text" id="doadorNome" placeholder="Nome" />
+      <input type="text" id="doadorTelefone" placeholder="Telefone" />
+      <input type="text" id="doadorCpf" placeholder="CPF/CNPJ" />
+      <input type="text" id="doadorEndereco" placeholder="Endereço" />
+      <button onclick="addDoador()">Adicionar</button>
+      <table id="doadorTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Doações -->
+    <div id="doacao-section" class="section hidden">
+      <h2>Doações</h2>
+      <input type="number" id="doacaoValor" placeholder="Valor" />
+      <input type="date" id="doacaoData" />
+      <input type="text" id="doacaoForma" placeholder="Forma de Pagamento" />
+      <button onclick="addDoacao()">Adicionar</button>
+      <table id="doacaoTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Doador</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Interações -->
+    <div id="interacao-section" class="section hidden">
+      <h2>Interações</h2>
+      <input type="text" id="tipoInteracao" placeholder="Tipo" />
+      <input type="text" id="observacoes" placeholder="Observações" />
+      <button onclick="addInteracaoNova()">Adicionar</button>
+      <table id="interacaoTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Doador ID</th>
+            <th>Tipo</th>
+            <th>Obs</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
     <script>
-      // Config do banco Supabase
+      // 🔑 Config Supabase
       const SUPABASE_URL = "https://iqtxmepahwyqngibdabt.supabase.co";
       const SUPABASE_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxdHhtZXBhaHd5cW5naWJkYWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MzQ2NTcsImV4cCI6MjA3NDMxMDY1N30.fokYHtnx0ulKhrX6HBRp-eQRwgerjqIGcxe6kaEGjAo";
@@ -156,53 +129,9 @@
       let currentDoadorId = null;
       let isAdmin = false;
 
-      // popular input com data atual
-      const dataInput = document.getElementById("doacaoData");
-      dataInput.valueAsDate = new Date();
-
-      // Formatar valor da doação como moeda brasileira (R$)
-      function formatCurrency(value) {
-        return new Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-          minimumFractionDigits: 2, // Sempre mostrar duas casas decimais
-        }).format(value);
-      }
-
-      // Converte data do formato yyyy-MM-dd para dd/MM/yyyy
-      function formatDateToBR(dateString) {
-        if (!dateString) return ""; // Verifica se a data existe
-        const date = new Date(dateString);
-        return date.toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        });
-      }
-
-      // Formatar data do formato ISO (2025-09-27T02:08:11.260859) para dd/MM/yyyy HH:mm
-      function formatDateTimeToBR(dateTimeString) {
-        if (!dateTimeString) return "";
-
-        const date = new Date(dateTimeString);
-
-        const brTime = new Date(date.getTime() - 3 * 3600000); // Subtrai 3 horas em milissegundos pra ficar com fuso Brasil
-
-        return (
-          brTime.toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          }) +
-          " " +
-          brTime.toLocaleTimeString("pt-BR", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        );
-      }
-
-      // --------- AUTH "autenticação" ---------
+      // =========================
+      // 🔐 AUTH
+      // =========================
       async function signIn() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
@@ -223,17 +152,7 @@
 
         isAdmin = doadorData && doadorData.nivel_acesso === 99;
 
-        // alert("Login OK! Admin: " + isAdmin);
-        // console.log("Login OK! Admin: " + isAdmin);
-        Swal.fire({
-          icon: "success",
-          title: "Bem-vindo ao Fênix Conecta. Login realizado com sucesso.",
-          toast: true,
-          position: "top-right",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-        });
+        alert("Login OK! Admin: " + isAdmin);
         loadData();
         toggleSections(true);
       }
@@ -242,16 +161,7 @@
         await supabaseClient.auth.signOut();
         currentUser = null;
         toggleSections(false);
-        // alert("Saiu!");
-        Swal.fire({
-          icon: "info",
-          title: "Você saiu! Entre novamente para acessar os dados.",
-          toast: true,
-          position: "top-right",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-        });
+        alert("Saiu!");
       }
 
       function toggleSections(show) {
@@ -264,11 +174,11 @@
         document
           .getElementById("interacao-section")
           .classList.toggle("hidden", !show);
-        document.getElementById("sair-btn").classList.toggle("hidden", !show);
       }
 
-      // ----------- DOADOR  -----------
-
+      // =========================
+      // 🧑 DOADOR NOVO
+      // =========================
       async function loadDoadores() {
         const { data, error } = await supabaseClient
           .from("doador_novo")
@@ -298,10 +208,9 @@
       async function addDoador() {
         const nome = document.getElementById("doadorNome").value;
         const telefone = document.getElementById("doadorTelefone").value;
-        const email = document.getElementById("doadorEmail").value;
         const cpf = document.getElementById("doadorCpf").value;
         const endereco = document.getElementById("doadorEndereco").value;
-        // const email = ""; // opcional
+        const email = ""; // opcional
 
         const { error } = await supabaseClient
           .from("doador_novo")
@@ -342,7 +251,9 @@
         loadDoadores();
       }
 
-      // ---------- DOAÇÃO NOVA ----------
+      // =========================
+      // 💸 DOAÇÃO NOVA
+      // =========================
       async function loadDoacoes() {
         const { data, error } = await supabaseClient
           .from("doacao_nova")
@@ -355,17 +266,16 @@
           tbody.innerHTML += `<tr>
       <td>${d.id_doacao}</td>
       <td>${d.id_doador}</td>
-      <td>${formatCurrency(d.valor)}</td> 
-      <td>${formatDateToBR(d.data_doacao || "")}</td>
+      <td>${d.valor}</td>
+      <td>${d.data_doacao || ""}</td>
       <td>${d.status || ""}</td>
-      <td class="text-center">
+      <td>
         <button onclick="updateDoacao(${
           d.id_doacao
         })"><i class="fa-regular fa-pen-to-square"></i></button>
         <button onclick="deleteDoacao(${
           d.id_doacao
-        })"><i class="fa-solid fa-trash"></i>
-          </button>
+        })"><i class="fa-solid fa-trash"></i></button>
       </td>
     </tr>`;
         });
@@ -375,7 +285,7 @@
         const valor = document.getElementById("doacaoValor").value;
         const dataDoacao = document.getElementById("doacaoData").value;
         const forma = document.getElementById("doacaoForma").value;
-        const idDoador = prompt("ID do doador (exp: 2):");
+        const idDoador = prompt("ID do doador:");
 
         const { error } = await supabaseClient.from("doacao_nova").insert({
           id_doador: parseInt(idDoador),
@@ -417,7 +327,6 @@
 
       // ---------- INTERAÇÃO ----------
       async function loadInteracoesNovas() {
-        // Admin vê todas as interações de todos os doadores
         let query = supabaseClient.from("interacao_nova").select("*");
         if (!isAdmin) query = query.eq("id_doador", currentDoadorId);
 
@@ -432,15 +341,14 @@
       <td>${i.id_doador || ""}</td>
       <td>${i.tipo_interacao}</td>
       <td>${i.observacoes || ""}</td>
-         <td>${formatDateTimeToBR(i.data_interacao)}</td> 
+      <td>${i.data_interacao}</td>
       <td class="text-center">
         <button onclick="updateInteracaoNova(${
           i.id_interacao
         })"><i class="fa-regular fa-pen-to-square"></i></button>
         ${
           isAdmin
-            ? `<button onclick="deleteInteracaoNova(${i.id_interacao})"><i class="fa-solid fa-trash"></i>
-</button>`
+            ? `<button onclick="deleteInteracaoNova(${i.id_interacao})">Deletar</button>`
             : ""
         }
       </td>
@@ -451,9 +359,8 @@
       async function addInteracaoNova() {
         const tipo = document.getElementById("tipoInteracao").value;
         const obs = document.getElementById("observacoes").value;
-        // if (!currentDoadorId && !isAdmin) return alert("Selecione um doador!");
-        // const idDoador = isAdmin ? currentDoadorId || 0 : currentDoadorId;
-        const idDoador = prompt("ID do doador (exp: 2):");
+        if (!currentDoadorId && !isAdmin) return alert("Selecione um doador!");
+        const idDoador = isAdmin ? currentDoadorId || 0 : currentDoadorId;
 
         const { error } = await supabaseClient.from("interacao_nova").insert({
           id_doador: idDoador,
@@ -468,7 +375,6 @@
       async function updateInteracaoNova(id) {
         const tipo = prompt("Novo tipo:");
         const obs = prompt("Nova observação:");
-        // const idDoador = prompt("Nova doador:");
         const { error } = await supabaseClient
           .from("interacao_nova")
           .update({ tipo_interacao: tipo, observacoes: obs })

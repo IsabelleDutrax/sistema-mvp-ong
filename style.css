@@ -9,7 +9,26 @@ body {
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
   color: #4b5563;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
+#main-container {
+  flex: 1 0 auto; /* Ocupa o máximo de espaço disponível */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin-block: 24px;
+}
+
 h2,
 p,
 span {
@@ -20,6 +39,7 @@ h1 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 h1,
 h2,
@@ -37,6 +57,10 @@ button {
   padding-bottom: 0.5rem;
   font-size: 16px;
   border: 1px solid rgb(206, 206, 206);
+  transition: background-color 0.3s ease; /* Animação suave ao mudar a cor */
+}
+button:hover {
+  background-color: #e8e8e8;
 }
 table {
   border-collapse: collapse;
@@ -74,8 +98,18 @@ tr:hover {
   max-width: 1040px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 
+h2 i {
+  color: #ff7b00;
+}
+
+.intro-section img {
+  border-radius: 50%;
+  border: 2px solid #f97316;
+  width: 120px;
+}
 .bg-orange {
   background-color: #f97316;
   border: none;
@@ -102,4 +136,55 @@ tr:hover {
 
 .mb-2 {
   margin-bottom: 16px;
+}
+
+.mt-1 {
+  margin-top: 8px;
+}
+
+.mt-2 {
+  margin-top: 16px;
+}
+
+.auth-inputs-column {
+  display: block;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Rodapé no fim */
+footer {
+  flex-shrink: 0; /* Não encolhe */
+  /* width: 100%; */
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer a {
+  color: #ffa500;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #ff7b00;
+}
+
+.social-links {
+  margin-top: 5px;
+}
+
+.social-links i {
+  margin: 0 5px;
+  color: #ffa500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.social-links i:hover {
+  color: #ff7b00;
 }
